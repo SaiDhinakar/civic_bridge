@@ -1,0 +1,68 @@
+[
+  {
+    "id": "v1",
+    "name": "Maya Patel",
+    "role": "Community Organizer",
+    "skills": ["Cleanup Drives", "Community Outreach", "Waste Management"],
+    "availability": "Weekends",
+    "distance": 2.3,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Maya",
+    "completed": 7,
+    "impactScore": 74
+  },
+  {
+    "id": "v2",
+    "name": "Rahul Verma",
+    "role": "Field Coordinator",
+    "skills": ["Logistics", "Event Coordination", "Cleanup Drives"],
+    "availability": "Available Today",
+    "distance": 1.1,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Rahul",
+    "completed": 12,
+    "impactScore": 91
+  },
+  {
+    "id": "v3",
+    "name": "Sana Ali",
+    "role": "Medical Support Lead",
+    "skills": ["Medical Support", "Community Outreach", "First Aid"],
+    "availability": "Evenings",
+    "distance": 4.2,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Sana",
+    "completed": 5,
+    "impactScore": 62
+  },
+  {
+    "id": "v4",
+    "name": "Arjun Nair",
+    "role": "Disaster Relief Expert",
+    "skills": ["Flood Relief", "Logistics", "Heavy Equipment"],
+    "availability": "Available Today",
+    "distance": 0.8,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun",
+    "completed": 18,
+    "impactScore": 95
+  },
+  {
+    "id": "v5",
+    "name": "Priya Sharma",
+    "role": "Environmental Activist",
+    "skills": ["Greening", "Tree Plantation", "Community Outreach"],
+    "availability": "Mornings",
+    "distance": 1.7,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Priya",
+    "completed": 9,
+    "impactScore": 80
+  },
+  {
+    "id": "v6",
+    "name": "Karan Mehta",
+    "role": "Sanitation Volunteer",
+    "skills": ["Sanitation", "Cleanup Drives", "Water Safety"],
+    "availability": "Available Today",
+    "distance": 3.1,
+    "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Karan",
+    "completed": 15,
+    "impactScore": 87
+  }
+]

@@ -1,0 +1,79 @@
+.report-form {
+    display: grid;
+    gap: 14px;
+    max-width: 760px;
+  }
+  
+  .report-form label {
+    display: grid;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: left;
+  }
+  
+  .report-form input,
+  .report-form textarea,
+  .report-form select {
+    width: 100%;
+    border: 1px solid #dbe1e7;
+    border-radius: 12px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    background: #fff;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  
+  .report-form input:focus,
+  .report-form textarea:focus,
+  .report-form select:focus {
+    outline: none;
+    border-color: var(--vol-primary);
+    box-shadow: 0 0 0 4px rgba(95, 156, 82, 0.12);
+  }
+  
+  .field-error {
+    color: #b42318;
+    font-size: 12px;
+  }
+  
+  .vol-dropzone {
+    border: 2px dashed #cfd8dc;
+    border-radius: 14px;
+    padding: 24px;
+    background: #fbfcfd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 8px;
+  }
+
+  .vol-dropzone:hover {
+    border-color: var(--vol-primary);
+    background: var(--vol-bg);
+  }
+
+  .vol-dropzone input[type="file"] {
+    display: none;
+  }
+
+  .vol-dropzone span {
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .success-text {
+    color: #027a48;
+    background: #ecfdf3;
+    border: 1px solid #c7ecd3;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 14px;
+  }

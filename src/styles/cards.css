@@ -1,0 +1,108 @@
+.stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 6px 18px rgba(17, 24, 39, 0.04);
+    transition: all 0.2s ease;
+  }
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 26px rgba(17, 24, 39, 0.1);
+  }
+
+  .stat-card__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  
+  .stat-card__label {
+    color: #6b7280;
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+
+  .stat-card__icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: #eef7ef;
+    color: #2e7d32;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+  }
+
+  .stat-card__value {
+    font-size: 32px;
+    line-height: 1.1;
+    margin: 0 0 8px;
+  }
+
+  .stat-card__delta {
+    color: #2e7d32;
+    font-size: 13px;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .opportunity-card {
+    display: grid;
+    gap: 10px;
+    transition: all 0.2s ease;
+  }
+
+  .opportunity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(17, 24, 39, 0.08);
+  }
+
+  .opportunity-card__head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .opportunity-card h3 {
+    font-size: 1.08rem;
+    margin: 0;
+  }
+  
+  .profile-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: 2fr 1fr;
+  }
+  .profile-main { grid-row: span 2; }
+  
+  .profile-avatar {
+    width: 94px;
+    height: 94px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #e8f5e9;
+  }
+  
+  .chip-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip {
+    background: #edf7ee;
+    color: #2e7d32;
+    border: 1px solid #d7ead9;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+  
+  @media (max-width: 900px) {
+    .profile-grid { grid-template-columns: 1fr; }
+    .profile-main { grid-row: auto; }
+  }

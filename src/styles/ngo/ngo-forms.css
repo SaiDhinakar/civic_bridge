@@ -1,0 +1,89 @@
+.ngo-form-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ngo-form-grid label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #6b7280;
+  text-align: left;
+}
+
+.ngo-form-grid input,
+.ngo-form-grid textarea,
+.ngo-form-grid select {
+  width: 100%;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  min-height: 42px;
+  padding: 10px 12px;
+  font-size: 15px;
+  color: #111827;
+  font-family: "Inter", sans-serif;
+}
+
+.ngo-form-grid input:focus,
+.ngo-form-grid textarea:focus,
+.ngo-form-grid select:focus {
+  outline: none;
+  border-color: var(--ngo-primary);
+  box-shadow: 0 0 0 4px rgba(66, 133, 244, 0.12);
+}
+
+.ngo-form-span {
+  grid-column: 1 / -1;
+}
+
+.ngo-dropzone {
+  border: 2px dashed #cfd8dc;
+  border-radius: 14px;
+  padding: 32px 24px;
+  background: #fbfcfd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.ngo-dropzone:hover {
+  border-color: var(--ngo-primary);
+  background: var(--ngo-bg);
+}
+
+.ngo-dropzone input[type="file"] {
+  display: none;
+}
+
+.ngo-dropzone span {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.ngo-dropzone span:first-of-type {
+  color: var(--text-strong);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ngo-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .ngo-form-grid {
+    grid-template-columns: 1fr;
+  }
+}

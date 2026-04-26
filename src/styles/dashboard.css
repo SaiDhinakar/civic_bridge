@@ -1,0 +1,159 @@
+.dashboard-grid {
+    display: grid;
+    gap: 16px;
+  }
+  
+  .welcome-card {
+    padding: 24px;
+  }
+
+  .welcome-card h2 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .welcome-card p:last-child {
+    margin-top: 10px;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  
+  .action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .task-item,
+  .activity-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid #f0f2f4;
+    padding: 12px 0;
+  }
+  .task-item:last-child,
+  .activity-item:last-child { border-bottom: 0; }
+
+  .activity-item__left {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .activity-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    background: #f0f9f1;
+    color: #2e7d32;
+    flex-shrink: 0;
+  }
+  
+  .align-right { text-align: right; }
+  
+  .opportunity-preview {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+    align-items: center;
+  }
+  .toolbar .opportunity-search,
+  .toolbar input,
+  .toolbar select {
+    width: 100%;
+  }
+
+  .toolbar select {
+    border: 1px solid #dbe1e7;
+    border-radius: 14px;
+    background: #fff;
+    padding: 11px 12px;
+    font-size: 14px;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
+  }
+
+  .opportunity-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 46px;
+    background: #fff;
+    border: 1px solid #dbe1e7;
+    border-radius: 14px;
+    padding: 0 12px;
+    color: #6b7280;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
+  }
+
+  .opportunity-search i {
+    font-size: 17px;
+  }
+
+  .opportunity-search input {
+    border: 0;
+    background: transparent;
+    width: 100%;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .opportunity-search input:focus {
+    outline: none;
+  }
+
+  .opportunity-search:focus-within {
+    border-color: #66bb6a;
+    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.18);
+  }
+
+  .toolbar input:focus,
+  .toolbar select:focus {
+    outline: none;
+    border-color: #66bb6a;
+    box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.18);
+  }
+  
+  .cards-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+  
+  .profile-stats {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 20px;
+  }
+
+  /* NGO Messages removed — styles cleaned up */
+  
+  @media (max-width: 1200px) {
+    .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .opportunity-preview { grid-template-columns: 1fr; }
+  }
+  
+  @media (max-width: 720px) {
+    .stats-grid,
+    .profile-stats { grid-template-columns: 1fr; }
+    .toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }

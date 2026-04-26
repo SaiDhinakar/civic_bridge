@@ -1,0 +1,50 @@
+.ngo-sidebar .brand-dot {
+  background: linear-gradient(180deg, #2e7d32, #4a90e2);
+}
+
+.ngo-sidebar .sidebar__link.active {
+  background: linear-gradient(90deg, rgba(67,160,71,0.12), rgba(67,160,71,0.05));
+  color: #2e7d32;
+  border-color: rgba(67,160,71,0.12);
+}
+
+.ngo-sidebar .sidebar__link:hover {
+  background: rgba(67,160,71,0.03);
+  color: #374151;
+}
+
+/* AI-focused highlight for the AI Insights nav item */
+.ngo-sidebar .sidebar__link.ai-highlight {
+  background: linear-gradient(90deg, rgba(99,102,241,0.06), rgba(99,102,241,0.02));
+  border-left: 3px solid rgba(99,102,241,0.85);
+  color: #334155;
+}
+.ngo-sidebar .sidebar__link.ai-highlight:hover {
+  background: linear-gradient(90deg, rgba(99,102,241,0.08), rgba(99,102,241,0.03));
+  color: #0f172a;
+}
+
+.topbar-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  min-height: 44px;
+  padding: 0 12px;
+  width: min(520px, 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.topbar-search input {
+  border: 0;
+  background: transparent;
+  width: 100%;
+  outline: none;
+}
+
+.topbar-search:focus-within {
+  border-color: #43a047;
+  box-shadow: 0 0 0 4px rgba(67, 160, 71, 0.08);
+}
