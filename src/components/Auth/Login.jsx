@@ -1,7 +1,17 @@
+import { useState } from "react";
 import GoogleButton from "./UI/GoogleButton";
 import { styles } from "../../styles/authStyles";
 
-export default function Login({ onGoogleAuth, onSwitchToRegister }) {
+export default function Login({ onSignIn, onGoogleAuth, onSwitchToRegister }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignInClick = () => {
+    if (onSignIn) {
+      onSignIn(email, password);
+    }
+  };
+
   return (
     <div>
       <div style={{ textAlign: "center", marginBottom: 12 }}>
@@ -18,6 +28,8 @@ export default function Login({ onGoogleAuth, onSwitchToRegister }) {
           <label style={styles.label}>Email Address</label>
           <input
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
             style={styles.input}
             onFocus={(e) => {
@@ -44,6 +56,8 @@ export default function Login({ onGoogleAuth, onSwitchToRegister }) {
           </div>
           <input
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             style={styles.input}
             onFocus={(e) => {
@@ -62,6 +76,7 @@ export default function Login({ onGoogleAuth, onSwitchToRegister }) {
         style={{ ...styles.primaryBtn, marginTop: 12, background: "#5f9c52", border: "none", width: "100%" }}
         onMouseEnter={(e) => (e.target.style.background = "#4e8843")}
         onMouseLeave={(e) => (e.target.style.background = "#5f9c52")}
+        onClick={handleSignInClick}
       >
         Sign In
       </button>

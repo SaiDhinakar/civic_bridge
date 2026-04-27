@@ -22,7 +22,7 @@ import NGOSettings from "../pages/ngo/Settings";
 // COMMUNITY PAGE IMPORT
 import CommunityPage from "../components/Community/CommunityPage";
 import ProtectedRoute from "../components/ProtectedRoute";
-import AuthContainer from "../../rc/components/Auth/AuthContainer";
+import AuthContainer from "../components/Auth/AuthContainer";
 
 const AppRoutes = () => (
   <Routes>

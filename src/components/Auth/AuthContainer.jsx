@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import ModeToggle from "./UI/ModeToggle";
@@ -9,6 +10,7 @@ import { ROLES } from "../../data/roles";
 import { styles } from "../../styles/authStyles";
 
 export default function AuthContainer() {
+  const navigate = useNavigate();
   const [mode, setMode] = useState("login"); // "login" | "register"
   const [selectedRole, setSelectedRole] = useState(null);
   const [formData, setFormData] = useState({});
@@ -35,6 +37,12 @@ export default function AuthContainer() {
   const handleRoleSelect = (r) => {
     setSelectedRole(r);
     setStep(2);
+  };
+
+  const handleSignIn = (email, password) => {
+    const role = (email || "").toLowerCase().includes("ngo") ? "ngo" : "volunteer";
+    localStorage.setItem("userRole", role);
+    navigate(`/${role}`);
   };
 
   const handleGoogleAuth = () => {
@@ -96,6 +104,7 @@ export default function AuthContainer() {
 
         {mode === "login" && (
           <Login
+            onSignIn={handleSignIn}
             onGoogleAuth={handleGoogleAuth}
             onSwitchToRegister={() => switchMode("register")}
           />

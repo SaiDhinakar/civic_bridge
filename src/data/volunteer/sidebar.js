@@ -6,7 +6,6 @@ export const sidebarData = {
       { id: "report", label: "Submit Report", path: "/volunteer/report", icon: "ri-file-text-line" },
       { id: "approvals", label: "Approvals", path: "/volunteer/approvals", icon: "ri-checkbox-line" },
       { id: "my-tasks", label: "My Tasks", path: "/volunteer/my-tasks", icon: "ri-task-line" },
-      { id: "profile", label: "My Profile", path: "/volunteer/profile", icon: "ri-user-3-line" },
-      { id: "signout", label: "Sign Out", path: "/sign-out", icon: "ri-logout-box-r-line" }
+      { id: "profile", label: "My Profile", path: "/volunteer/profile", icon: "ri-user-3-line" }
     ]
   };
