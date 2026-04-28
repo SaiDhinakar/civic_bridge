@@ -1,9 +1,9 @@
 export const volunteerImpactStats = [
-  { id: "completed", label: "Tasks Completed", value: 38, delta: "+4 this week", icon: "✅", accent: "#16a34a", bg: "#f0fdf4" },
-  { id: "active",    label: "Active Assignments", value: 3,  delta: "2 AI assigned", icon: "⚡", accent: "#4285F4", bg: "#eff6ff" },
-  { id: "hours",     label: "Volunteer Hours",    value: 126, delta: "+9 this month", icon: "⏱", accent: "#7c3aed", bg: "#f3eeff" },
-  { id: "impact",    label: "Impact Score",       value: "92", delta: "Top 12%",     icon: "🏆", accent: "#f59e0b", bg: "#fff8e6" },
-  { id: "communities", label: "Communities Helped", value: 14, delta: "Across 5 wards", icon: "👥", accent: "#0ea5e9", bg: "#e0f7ff" },
+  { id: "completed", label: "Tasks Completed", value: 38, delta: "+4 this week", iconClass: "ri-checkbox-circle-line", accent: "#16a34a", bg: "#f0fdf4" },
+  { id: "active",    label: "Active Assignments", value: 3,  delta: "2 AI assigned", iconClass: "ri-flash-line", accent: "#4285F4", bg: "#eff6ff" },
+  { id: "hours",     label: "Volunteer Hours",    value: 126, delta: "+9 this month", iconClass: "ri-time-line", accent: "#7c3aed", bg: "#f3eeff" },
+  { id: "impact",    label: "Impact Score",       value: "92", delta: "Top 12%",     iconClass: "ri-award-line", accent: "#f59e0b", bg: "#fff8e6" },
+  { id: "communities", label: "Communities Helped", value: 14, delta: "Across 5 wards", iconClass: "ri-team-line", accent: "#0ea5e9", bg: "#e0f7ff" },
 ];
 
 export const assignedTasks = [

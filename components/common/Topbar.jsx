@@ -19,9 +19,9 @@ const pageTitles = {
 const Topbar = ({
   titlePrefix,
   subtitle,
-  userName = "Aarav",
+  // userName = "Aarav",
   userRole = "Community Volunteer",
-  avatarSrc = "https://i.pravatar.cc/88?img=12"
+  // avatarSrc = "https://i.pravatar.cc/88?img=12"
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -82,10 +82,10 @@ const Topbar = ({
         </button>
 
         <div className="topbar-user">
-          <img className="topbar-user__avatar" src={avatarSrc} alt="User avatar" />
+          {/* <img className="topbar-user__avatar" src={avatarSrc} alt="User avatar" /> */}
           <div className="topbar-user__meta">
-            <p className="topbar-user__greeting">{userName}</p>
-            <p className="topbar-user__role">{userRole}</p>
+            {/* <p className="topbar-user__greeting">{userName}</p> */}
+            {/* <p className="topbar-user__role">{userRole}</p> */}
           </div>
         </div>
 

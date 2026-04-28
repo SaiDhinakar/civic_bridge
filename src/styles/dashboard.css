@@ -157,3 +157,46 @@
       align-items: stretch;
     }
   }
+
+  /* Loading and Error States */
+  .dashboard-loading,
+  .dashboard-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 20px;
+  }
+
+  .dashboard-loading {
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px dashed #e5e7eb;
+  }
+
+  .dashboard-error {
+    background: #fef2f2;
+    border-radius: 12px;
+    border: 1px solid #fecaca;
+  }
+
+  .dashboard-error p {
+    color: #dc2626;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e5e7eb;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

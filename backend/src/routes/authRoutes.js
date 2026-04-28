@@ -6,6 +6,19 @@ const { verifyGoogleToken, verifyJWT } = require('../middleware/auth');
 const router = express.Router();
 
 /**
+ * POST /api/auth/login
+ * Email and password login
+ */
+router.post(
+  '/login',
+  [
+    body('email').isEmail().normalizeEmail(),
+    body('password').notEmpty().withMessage('Password is required'),
+  ],
+  authController.emailLogin
+);
+
+/**
  * POST /api/auth/google
  * Google OAuth authentication
  */

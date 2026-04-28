@@ -18,9 +18,19 @@ const CommunityReportsFilters = ({
         <input
           value={query}
           onChange={(e) => onQueryChange(e.target.value)}
-          placeholder="Search reports"
+          placeholder="Search reports, locations..."
           aria-label="Search reports"
         />
+        {query && (
+          <button
+            type="button"
+            className="filter-search-clear"
+            onClick={() => onQueryChange('')}
+            aria-label="Clear search"
+          >
+            <i className="ri-close-line" />
+          </button>
+        )}
       </label>
 
       <div className="filter-controls">
@@ -29,6 +39,7 @@ const CommunityReportsFilters = ({
           <select value={category} onChange={(e) => onCategoryChange(e.target.value)} aria-label="Category">
             {categories.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
+          <i className="ri-arrow-down-s-line filter-chip-arrow" />
         </div>
 
         <div className="filter-chip" role="group" aria-label="Priority filter">
@@ -36,6 +47,7 @@ const CommunityReportsFilters = ({
           <select value={urgency} onChange={(e) => onUrgencyChange(e.target.value)} aria-label="Priority">
             {urgencies.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
+          <i className="ri-arrow-down-s-line filter-chip-arrow" />
         </div>
 
         <div className="filter-chip" role="group" aria-label="Location filter">
@@ -43,6 +55,7 @@ const CommunityReportsFilters = ({
           <select value={location} onChange={(e) => onLocationChange(e.target.value)} aria-label="Location">
             {locations.map((item) => <option key={item} value={item}>{item}</option>)}
           </select>
+          <i className="ri-arrow-down-s-line filter-chip-arrow" />
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ import NGOAnalytics from "../pages/ngo/Analytics";
 import AIInsights from "../pages/ngo/AIInsights";
 import NGOCommunityReports from "../pages/ngo/CommunityReports";
 import NGOSettings from "../pages/ngo/Settings";
+import NGORegistration from "../components/ngo/NGORegistration";
 
 // COMMUNITY PAGE IMPORT
 import CommunityPage from "../components/Community/CommunityPage";
@@ -28,6 +29,7 @@ const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<AuthContainer />} />
     <Route path="/sign-out" element={<Navigate to="/" replace />} />
+    <Route path="/ngo/register" element={<NGORegistration />} />
 
     <Route element={<ProtectedRoute />}>
       {/* COMMUNITY PAGE ROUTE */}

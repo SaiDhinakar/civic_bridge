@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useEffect, useState } from "react-router-dom";
 
 const pageTitles = {
   "/volunteer/dashboard": "Volunteer Dashboard",
@@ -19,12 +19,27 @@ const pageTitles = {
 const Topbar = ({
   titlePrefix,
   subtitle,
-  userName = "Aarav",
-  userRole = "Community Volunteer",
-  avatarSrc = "https://i.pravatar.cc/88?img=12"
+  userName,
+  userRole,
+  avatarSrc
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [displayName, setDisplayName] = useState("");
+  const [role, setRole] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  // Read user data from localStorage on mount and when location changes
+  useEffect(() => {
+    const storedName = localStorage.getItem('userName');
+    const storedRole = localStorage.getItem('userRole');
+    const storedAvatar = localStorage.getItem('userAvatar');
+
+    setDisplayName(userName || storedName || "Guest User");
+    setRole(userRole || storedRole || "Volunteer");
+    setAvatar(avatarSrc || storedAvatar || "https://i.pravatar.cc/88?img=12");
+  }, [userName, userRole, avatarSrc]);
+
   const title = titlePrefix || pageTitles[location.pathname] || "CivicBridge";
 
   const defaultSubtitles = {
@@ -82,10 +97,10 @@ const Topbar = ({
         </button>
 
         <div className="topbar-user">
-          <img className="topbar-user__avatar" src={avatarSrc} alt="User avatar" />
+          <img className="topbar-user__avatar" src={avatar} alt="User avatar" />
           <div className="topbar-user__meta">
-            <p className="topbar-user__greeting">{userName}</p>
-            <p className="topbar-user__role">{userRole}</p>
+            <p className="topbar-user__greeting">{displayName}</p>
+            <p className="topbar-user__role">{role}</p>
           </div>
         </div>
 

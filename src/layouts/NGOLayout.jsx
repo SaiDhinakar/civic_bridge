@@ -19,9 +19,6 @@ const NGOLayout = () => {
       <div className="main-panel">
         <Topbar
           subtitle="Monitor operations, teams and civic outcomes in one place."
-          userName="Saanvi"
-          userRole="NGO Admin"
-          avatarSrc="https://i.pravatar.cc/88?img=32"
         />
         <main className="content">
           <Outlet />

@@ -1,7 +1,27 @@
 import React from "react";
 
-const ResourcePanel = ({ data }) => {
-  const { volunteerAvailability, resourceAllocation, shortageAlerts, readinessScore, activeSupportCapacity } = data;
+const ResourcePanel = ({ data = {} }) => {
+  const { 
+    volunteerAvailability = [], 
+    resourceAllocation = [], 
+    shortageAlerts = [], 
+    readinessScore = 0, 
+    activeSupportCapacity = 0 
+  } = data;
+
+  // Handle case where data is still undefined or invalid
+  if (!data || Object.keys(data).length === 0) {
+    return (
+      <section className="resource-panel card card--lift">
+        <div className="resource-header">
+          <div>
+            <h3>Resource Data</h3>
+            <p className="muted">No resource data available.</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="resource-panel card card--lift">
@@ -57,7 +77,7 @@ const ResourcePanel = ({ data }) => {
           <div className="alerts-list">
             {shortageAlerts.map((s) => (
               <div key={s.id} className={`alert-card ${s.urgency.toLowerCase()}`}>
-                <div className="alert-icon">🚨</div>
+                <div className="alert-icon"><i className="ri-alert-line" /></div>
                 <div className="alert-body">
                   <strong>{s.item} Shortage</strong>
                   <span>{s.location} • {s.urgency} Urgency</span>

@@ -1,12 +1,15 @@
 import { BrowserRouter } from 'react-router-dom'
 import 'remixicon/fonts/remixicon.css'
 import AppRoutes from './routes/AppRoutes'
+import { NGOProvider } from './context/NGOContext'
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <NGOProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </NGOProvider>
   )
 }
 

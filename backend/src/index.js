@@ -16,7 +16,20 @@ const app = express();
 // Middleware
 console.log('⚙️  [MIDDLEWARE] Configuring CORS and body parsing...');
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000',
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:5173',
+      'http://localhost:5174',
+      process.env.CORS_ORIGIN
+    ].filter(Boolean);
+    
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -35,6 +48,7 @@ const userRoutes = require('./routes/userRoutes');
 const issueRoutes = require('./routes/issueRoutes');
 const ngoRoutes = require('./routes/ngoRoutes');
 const matchingRoutes = require('./routes/matchingRoutes');
+const demoRoutes = require('./routes/demoRoutes');
 
 // API Routes
 console.log('📍 [ROUTES] Mounting /api/auth...');
@@ -47,6 +61,8 @@ console.log('📍 [ROUTES] Mounting /api/ngos...');
 app.use('/api/ngos', ngoRoutes);
 console.log('📍 [ROUTES] Mounting /api/matches...');
 app.use('/api/matches', matchingRoutes);
+console.log('📍 [ROUTES] Mounting /api/demo...');
+app.use('/api/demo', demoRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

@@ -22,14 +22,14 @@ const CommunityReportCard = ({ report, onViewDetails }) => {
       <div className="tile-ai-row">
         <div className="ai-indicator">
           {aiAssigned > 0 ? (
-            <><span className="ai-emoji">🧠</span> <span className="ai-text">AI assigned {aiAssigned}</span></>
+            <><i className="ri-brain-line" /> <span className="ai-text">AI assigned {aiAssigned}</span></>
           ) : needs > 0 ? (
-            <><span className="ai-emoji">⚠️</span> <span className="ai-text">Needs {needs} more</span></>
+            <><i className="ri-alert-line" /> <span className="ai-text">Needs {needs} more</span></>
           ) : (
-            <><span className="ai-emoji">✅</span> <span className="ai-text">Recommendation ready</span></>
+            <><i className="ri-check-line" /> <span className="ai-text">Recommendation ready</span></>
           )}
         </div>
-        <button className="tile-link" onClick={() => onViewDetails(report)}>View Details →</button>
+        <button className="tile-link" onClick={() => onViewDetails(report)}>View Details <i className="ri-arrow-right-line" /></button>
       </div>
 
       <div className="tile-progress">

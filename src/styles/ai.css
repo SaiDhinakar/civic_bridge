@@ -3,6 +3,30 @@
    CivicBridge NGO Dashboard
    ================================================================ */
 
+/* ---------- Icon Utilities ---------- */
+i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-metric-icon i,
+.activity-icon-wrap i,
+.status-pill-sm i,
+.urgency-badge i,
+.status-pill i,
+.alloc-meta-item i,
+.indicator-badge i,
+.alloc-stat-icon i,
+.section-title-main i,
+.widget-title i {
+  font-size: 1em;
+}
+
+.alloc-stat-icon {
+  font-size: 18px;
+}
+
 /* ---------- Page Shell ---------- */
 .ai-page {
   padding: 24px;
@@ -377,6 +401,15 @@
 .alloc-meta-item {
   font-size: 11px;
   color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.alloc-meta-item i {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .alloc-status-group {
@@ -399,6 +432,12 @@
   border: 1px solid transparent;
 }
 
+.urgency-badge i {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+
 .urgency-critical { background: #fef2f2; color: #b91c1c; border-color: #fecaca; }
 .urgency-high    { background: #fff7ed; color: #c2410c; border-color: #fed7aa; }
 .urgency-medium  { background: #fefce8; color: #a16207; border-color: #fde68a; }
@@ -413,6 +452,12 @@
   border-radius: 999px;
   font-size: 11px;
   font-weight: 700;
+}
+
+.status-pill i {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .status-pill.auto-assigned { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
@@ -612,11 +657,18 @@
 .indicator-badge {
   display: inline-flex;
   align-items: center;
+  gap: 3px;
   padding: 2px 6px;
   border-radius: 999px;
   font-size: 10px;
   font-weight: 700;
   white-space: nowrap;
+}
+
+.indicator-badge i {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .auto-badge   { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
@@ -634,6 +686,16 @@
   cursor: pointer;
   width: 100%;
   transition: all .15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.show-more-btn i {
+  font-size: 13px;
+  display: flex;
+  align-items: center;
 }
 
 .show-more-btn:hover {

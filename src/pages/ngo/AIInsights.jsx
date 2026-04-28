@@ -3,20 +3,20 @@ import AISmartAllocation from "../../components/ngo/AIRecommendations/AISmartAll
 import "../../styles/ai.css";
 
 const METRICS = [
-  { icon: "⚡", label: "Auto Assignments Today", value: "24", accent: "#4285F4", bg: "#eef3fe" },
-  { icon: "🚨", label: "Escalated Tasks", value: "3", accent: "#ea4335", bg: "#fdf1f0" },
-  { icon: "🎯", label: "Avg Match Accuracy", value: "87%", accent: "#0ea5e9", bg: "#e0f7ff" },
-  { icon: "📍", label: "Shortage Areas", value: "2 zones", accent: "#f59e0b", bg: "#fff8e6" },
-  { icon: "🧠", label: "AI Tasks Generated", value: "11", accent: "#7c3aed", bg: "#f3eeff" },
+  { iconClass: "ri-flash-line", label: "Auto Assignments Today", value: "24", accent: "#4285F4", bg: "#eef3fe" },
+  { iconClass: "ri-alert-line", label: "Escalated Tasks", value: "3", accent: "#ea4335", bg: "#fdf1f0" },
+  { iconClass: "ri-target-line", label: "Avg Match Accuracy", value: "87%", accent: "#0ea5e9", bg: "#e0f7ff" },
+  { iconClass: "ri-map-pin-line", label: "Shortage Areas", value: "2 zones", accent: "#f59e0b", bg: "#fff8e6" },
+  { iconClass: "ri-brain-line", label: "AI Tasks Generated", value: "11", accent: "#7c3aed", bg: "#f3eeff" },
 ];
 
 const ACTIVITY_FEED = [
-  { icon: "⚡", text: "12 volunteers auto-assigned to Ward 11 sanitation task", time: "2m ago", type: "assign" },
-  { icon: "🚨", text: "Flood Relief task escalated — shortage detected in Ward 6", time: "8m ago", type: "escalate" },
-  { icon: "📍", text: "Nearby volunteers matched within 1.5 km for Market Waste task", time: "15m ago", type: "location" },
-  { icon: "🧠", text: "AI generated sanitation response plan for 3 active sectors", time: "22m ago", type: "ai" },
-  { icon: "✅", text: "Allocation complete — Park Restoration Drive, Ward 3", time: "34m ago", type: "complete" },
-  { icon: "⚡", text: "8 volunteers dispatched — Sewage Overflow Containment", time: "41m ago", type: "assign" },
+  { iconClass: "ri-flash-line", text: "12 volunteers auto-assigned to Ward 11 sanitation task", time: "2m ago", type: "assign" },
+  { iconClass: "ri-alert-line", text: "Flood Relief task escalated — shortage detected in Ward 6", time: "8m ago", type: "escalate" },
+  { iconClass: "ri-map-pin-line", text: "Nearby volunteers matched within 1.5 km for Market Waste task", time: "15m ago", type: "location" },
+  { iconClass: "ri-brain-line", text: "AI generated sanitation response plan for 3 active sectors", time: "22m ago", type: "ai" },
+  { iconClass: "ri-check-line", text: "Allocation complete — Park Restoration Drive, Ward 3", time: "34m ago", type: "complete" },
+  { iconClass: "ri-flash-line", text: "8 volunteers dispatched — Sewage Overflow Containment", time: "41m ago", type: "assign" },
 ];
 
 const activityTypeColors = {
@@ -49,7 +49,7 @@ const AIInsights = () => {
       <section className="ai-metrics-row">
         {METRICS.map((m, i) => (
           <div className="ai-metric-card" key={i} style={{ "--accent": m.accent, "--accent-bg": m.bg }}>
-            <div className="ai-metric-icon">{m.icon}</div>
+            <div className="ai-metric-icon"><i className={m.iconClass} /></div>
             <div className="ai-metric-body">
               <div className="ai-metric-value">{m.value}</div>
               <div className="ai-metric-label">{m.label}</div>
@@ -73,17 +73,17 @@ const AIInsights = () => {
           <div className="ai-widget">
             <h4 className="widget-title">AI Automation Status</h4>
             <div className="status-badges-grid">
-              <span className="status-pill-sm auto-pill">⚡ Auto Assigned</span>
-              <span className="status-pill-sm smart-pill">🧠 Smart Match</span>
-              <span className="status-pill-sm nearby-pill">📍 Nearby Match</span>
-              <span className="status-pill-sm esc-pill">🚨 Escalated</span>
-              <span className="status-pill-sm complete-pill">✅ Allocation Done</span>
+              <span className="status-pill-sm auto-pill"><i className="ri-flash-line" /> Auto Assigned</span>
+              <span className="status-pill-sm smart-pill"><i className="ri-brain-line" /> Smart Match</span>
+              <span className="status-pill-sm nearby-pill"><i className="ri-map-pin-line" /> Nearby Match</span>
+              <span className="status-pill-sm esc-pill"><i className="ri-alert-line" /> Escalated</span>
+              <span className="status-pill-sm complete-pill"><i className="ri-check-line" /> Allocation Done</span>
             </div>
           </div>
 
           {/* Activity Stream */}
           <div className="ai-widget activity-widget">
-            <h4 className="widget-title">⚡ AI Activity Stream</h4>
+            <h4 className="widget-title"><i className="ri-flash-line" /> AI Activity Stream</h4>
             <ul className="activity-stream">
               {ACTIVITY_FEED.map((item, i) => (
                 <li className="activity-item" key={i}>
@@ -91,7 +91,7 @@ const AIInsights = () => {
                     className="activity-icon-wrap"
                     style={{ background: activityTypeColors[item.type] + "18", color: activityTypeColors[item.type] }}
                   >
-                    {item.icon}
+                    <i className={item.iconClass} />
                   </span>
                   <div className="activity-body">
                     <span className="activity-text">{item.text}</span>
@@ -104,7 +104,7 @@ const AIInsights = () => {
 
           {/* Quick Stats */}
           <div className="ai-widget stats-widget">
-            <h4 className="widget-title">📊 Allocation Stats</h4>
+            <h4 className="widget-title"><i className="ri-bar-chart-2-line" /> Allocation Stats</h4>
             <div className="quick-stat-row">
               <span className="qs-label">Match Rate</span>
               <div className="qs-bar-wrap">

@@ -9,7 +9,7 @@ export const resourceData = {
     resourceAllocation: [
       { id: "r1", label: "Medical Kits", assigned: 45, total: 100, unit: "kits" },
       { id: "r2", label: "Water Supply", assigned: 1200, total: 2000, unit: "L" },
-      { id: "r3", label: "Safety Vests", assigned: 85, total: 90, unit: "vasts" }
+      { id: "r3", label: "Safety Vests", assigned: 85, total: 90, unit: "vests" }
     ],
     shortageAlerts: [
       { id: "s1", type: "Shortage", item: "Transport Vehicles", location: "Sector 8", urgency: "High" },

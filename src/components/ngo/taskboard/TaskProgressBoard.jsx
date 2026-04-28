@@ -30,15 +30,16 @@ const TaskProgressBoard = ({ completionRate, categoryProgress, tasks }) => {
       const task = { ...t };
       const a = assignments[task.id];
       const accepted = a && Object.values(a).some((v) => v === 'accepted');
+      
+      // merge AI metadata when available (prefer AI data for title/location/volunteers/deadline/priority)
+      const ai = aiTasks.find((x) => x.id === task.id);
+      
       if (accepted) {
         task.state = 'Assigned';
       } else if (ai) {
         // If AI knows about this task and there's no acceptance yet, mark as Recommended
         task.state = 'Recommended';
       }
-
-      // merge AI metadata when available (prefer AI data for title/location/volunteers/deadline/priority)
-      const ai = aiTasks.find((x) => x.id === task.id);
       if (ai) {
         task.title = ai.title || task.title;
         task.location = ai.location || task.location;

@@ -40,7 +40,7 @@ function ImpactStats() {
           key={s.id}
           style={{ "--m-accent": s.accent, "--m-bg": s.bg }}
         >
-          <div className="mt-metric-icon">{s.icon}</div>
+          <div className="mt-metric-icon"><i className={s.iconClass} /></div>
           <div className="mt-metric-body">
             <div className="mt-metric-value">{s.value}</div>
             <div className="mt-metric-label">{s.label}</div>
@@ -57,14 +57,14 @@ function FilterBar({ query, setQuery, category, setCategory }) {
   return (
     <div className="mt-filter-bar">
       <label className="mt-search-box">
-        <span className="mt-search-icon">🔍</span>
+        <i className="ri-search-line" />
         <input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search tasks, NGOs, locations..."
         />
         {query && (
-          <button className="mt-search-clear" onClick={() => setQuery("")}>✕</button>
+          <button className="mt-search-clear" onClick={() => setQuery("")}><i className="ri-close-line" /></button>
         )}
       </label>
 

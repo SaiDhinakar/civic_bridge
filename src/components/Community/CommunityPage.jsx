@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import useCommunityReports from '../../hooks/useCommunityReports';
 import './CommunityPage.css';
 import { CATEGORIES } from './types';
@@ -11,14 +11,26 @@ export default function CommunityPage() {
     location: '',
     photo: null
   });
+  const [user, setUser] = useState({
+    name: 'Community Member',
+    role: 'Community Member',
+    organization: 'CivicBridge'
+  });
 
   const { reports, submitReport } = useCommunityReports();
 
-  const user = {
-    name: 'Aarav Sharma',
-    role: 'Community Member',
-    organization: 'GreenFuture Foundation'
-  };
+  useEffect(() => {
+    const storedName = localStorage.getItem('userName');
+    const storedRole = localStorage.getItem('userRole');
+    
+    if (storedName || storedRole) {
+      setUser(prev => ({
+        ...prev,
+        name: storedName || prev.name,
+        role: storedRole || prev.role
+      }));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;

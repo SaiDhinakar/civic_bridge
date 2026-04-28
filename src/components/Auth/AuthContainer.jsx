@@ -49,6 +49,17 @@ export default function AuthContainer() {
     alert("Google OAuth flow would initiate here.\nScopes: profile, email\nRedirect: /auth/google/callback");
   };
 
+  const handleLoginSuccess = (user) => {
+    // Redirect based on user role
+    if (user.role === 'ngo_admin') {
+      navigate('/ngo/dashboard');
+    } else if (user.role === 'volunteer') {
+      navigate('/volunteer/dashboard');
+    } else {
+      navigate('/community');
+    }
+  };
+
   const handleSubmit = () => {
     if (!agreed) return;
     setSubmitted(true);
@@ -107,6 +118,7 @@ export default function AuthContainer() {
             onSignIn={handleSignIn}
             onGoogleAuth={handleGoogleAuth}
             onSwitchToRegister={() => switchMode("register")}
+            onLoginSuccess={handleLoginSuccess}
           />
         )}
 
