@@ -1,148 +1,15 @@
 {
   "version": 2,
-  "name": "civic-bridge",
-  "public": false,
-  
-  "experimentalServices": {
-    "frontend": {
-      "routePrefix": "/",
-      "framework": "vite",
-      "buildCommand": "npm run build",
-      "outputDirectory": "dist"
-    },
-    "backend": {
-      "entrypoint": "backend/src/index.js",
-      "routePrefix": "/api",
-      "framework": "node",
-      "buildCommand": "cd backend && npm install --legacy-peer-deps"
-    }
-  },
-
-  "env": [
+ "builds": [
     {
-      "key": "NODE_ENV",
-      "value": "production"
-    },
-    {
-      "key": "PORT",
-      "value": "3000"
-    },
-    {
-      "key": "FIREBASE_PROJECT_ID",
-      "value": "@firebase_project_id"
-    },
-    {
-      "key": "FIREBASE_PRIVATE_KEY",
-      "value": "@firebase_private_key"
-    },
-    {
-      "key": "FIREBASE_CLIENT_EMAIL",
-      "value": "@firebase_client_email"
-    },
-    {
-      "key": "FIREBASE_DATABASE_URL",
-      "value": "@firebase_database_url"
-    },
-    {
-      "key": "GOOGLE_CLIENT_ID",
-      "value": "@google_client_id"
-    },
-    {
-      "key": "GOOGLE_CLIENT_SECRET",
-      "value": "@google_client_secret"
-    },
-    {
-      "key": "GEMINI_API_KEY",
-      "value": "@gemini_api_key"
-    },
-    {
-      "key": "JWT_SECRET",
-      "value": "@jwt_secret"
-    },
-    {
-      "key": "JWT_EXPIRY",
-      "value": "7d"
-    },
-    {
-      "key": "CORS_ORIGIN",
-      "value": "@cors_origin"
-    },
-    {
-      "key": "AI_MODEL_VERSION",
-      "value": "gemini-pro"
-    },
-    {
-      "key": "MATCHING_THRESHOLD",
-      "value": "0.7"
-    },
-    {
-      "key": "MAX_VOLUNTEERS_PER_ISSUE",
-      "value": "5"
+      "src": "src/index.js",
+      "use": "@vercel/node"
     }
   ],
-
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "backend/package.json",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": "backend/**",
-        "excludeFiles": "backend/node_modules/**"
-      }
-    }
-  ],
-
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "backend/src/index.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/index.html"
-    }
-  ],
-
-  "headers": [
-    {
-      "source": "/api/(.*)",
-      "headers": [
-        { "key": "Content-Type", "value": "application/json" },
-        { "key": "Cache-Control", "value": "max-age=0, no-cache, no-store, must-revalidate" },
-        { "key": "Access-Control-Allow-Credentials", "value": "true" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET,OPTIONS,PATCH,DELETE,POST,PUT" },
-        { "key": "Access-Control-Allow-Headers", "value": "X-CSRF-Token,X-Requested-With,Content-Type,Authorization" }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, immutable" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" },
-        { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
-      ]
-    }
-  ],
-
-  "redirects": [
-    {
-      "source": "/docs",
-      "destination": "/api/docs"
-    }
-  ],
-
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "dest": "/src/index.js"
     }
   ]
 }
