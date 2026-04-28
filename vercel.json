@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "npm install --legacy-peer-deps",
-  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/(.*)",
