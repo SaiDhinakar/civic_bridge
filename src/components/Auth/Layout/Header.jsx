@@ -11,9 +11,14 @@ export default function Header() {
           color: "#5a5555",
           marginTop: 16,
           letterSpacing: "-0.02em",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 8
         }}
       >
-        Civic<span style={{ color: "#5f9c52", fontStyle: "italic" }}>Bridge</span>
+        <i className="ri-building-3-line" style={{ color: "#5f9c52", fontSize: 32 }}></i>
+        <span>Civic<span style={{ color: "#5f9c52", fontStyle: "italic" }}>Bridge</span></span>
       </div>
       <div style={{ fontSize: 13, color: "#8b8280", marginTop: 4, fontWeight: 300 }}>
         AI-powered volunteer coordination

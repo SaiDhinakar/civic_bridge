@@ -52,6 +52,15 @@ const ngoReducer = (state, action) => {
       };
 
     case 'LOGOUT':
+      // Clear all auth-related localStorage entries
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('ngoId');
+      localStorage.removeItem('adminId');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('userName');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userAvatar');
       return {
         ...initialState,
         ngoId: null,

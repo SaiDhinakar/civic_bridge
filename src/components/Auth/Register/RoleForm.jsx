@@ -1,8 +1,8 @@
 import FormField from "../Form/FormField";
 import GoogleButton from "../UI/GoogleButton";
-import { styles } from "../../../../styles/authStyles";
+import { styles } from "../../../styles/authStyles";
 
-export default function RoleForm({ role, formData, agreed, onUpdateField, onAgreeChange, onSubmit, onGoogleAuth, onBack }) {
+export default function RoleForm({ role, formData, agreed, isSubmitting, submitError, onUpdateField, onAgreeChange, onSubmit, onGoogleAuth, onBack }) {
   return (
     <div>
       <button
@@ -26,7 +26,7 @@ export default function RoleForm({ role, formData, agreed, onUpdateField, onAgre
             fontSize: 22,
           }}
         >
-          {role.emoji}
+          <i className={role.icon} style={{ color: role.color }}></i>
         </div>
         <div>
           <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: 22, color: "#5a5555", lineHeight: 1.2 }}>
@@ -72,19 +72,37 @@ export default function RoleForm({ role, formData, agreed, onUpdateField, onAgre
         </label>
       </div>
 
+      {submitError && (
+        <div style={{
+          padding: "10px 12px",
+          marginBottom: "12px",
+          backgroundColor: "#fee",
+          border: "1px solid #fcc",
+          borderRadius: "6px",
+          color: "#c33",
+          fontSize: "13px",
+        }}>
+          {submitError}
+        </div>
+      )}
+
       <button
         onClick={onSubmit}
-        disabled={!agreed}
+        disabled={!agreed || isSubmitting}
         style={{
           ...styles.primaryBtn,
           width: "100%",
           border: "none",
-          background: agreed ? role.color : "#d8d3d0",
-          cursor: agreed ? "pointer" : "not-allowed",
+          background: !agreed || isSubmitting ? "#d8d3d0" : role.color,
+          cursor: !agreed || isSubmitting ? "not-allowed" : "pointer",
           color: "white",
         }}
       >
-        {role.key === "ngo" ? "Submit for Verification" : `Create ${role.label} Account`}
+        {isSubmitting
+          ? "Submitting…"
+          : role.key === "ngo"
+          ? "Submit for Verification"
+          : `Create ${role.label} Account`}
       </button>
 
       <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 16 }}>

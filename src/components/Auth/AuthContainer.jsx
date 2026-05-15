@@ -8,6 +8,7 @@ import RoleSelection from "./Register/RoleSelection";
 import RoleForm from "./Register/RoleForm";
 import { ROLES } from "../../data/roles";
 import { styles } from "../../styles/authStyles";
+import { emailRegister, registerNGO } from "../../services/authAPI";
 
 export default function AuthContainer() {
   const navigate = useNavigate();
@@ -18,6 +19,8 @@ export default function AuthContainer() {
   const [animating, setAnimating] = useState(false);
   const [agreed, setAgreed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const role = selectedRole ? ROLES[selectedRole] : null;
 
@@ -30,6 +33,7 @@ export default function AuthContainer() {
       setFormData({});
       setAgreed(false);
       setSubmitted(false);
+      setSubmitError("");
       setAnimating(false);
     }, 180);
   };
@@ -37,12 +41,6 @@ export default function AuthContainer() {
   const handleRoleSelect = (r) => {
     setSelectedRole(r);
     setStep(2);
-  };
-
-  const handleSignIn = (email, password) => {
-    const role = (email || "").toLowerCase().includes("ngo") ? "ngo" : "volunteer";
-    localStorage.setItem("userRole", role);
-    navigate(`/${role}`);
   };
 
   const handleGoogleAuth = () => {
@@ -60,9 +58,88 @@ export default function AuthContainer() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!agreed) return;
-    setSubmitted(true);
+
+    // Client-side password validation
+    const { password, confirmPassword } = formData;
+    if (!password || password.length < 8) {
+      setSubmitError("Password must be at least 8 characters.");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      setSubmitError("Password must contain at least one uppercase letter.");
+      return;
+    }
+    if (!/[0-9]/.test(password)) {
+      setSubmitError("Password must contain at least one number.");
+      return;
+    }
+    if (password !== confirmPassword) {
+      setSubmitError("Passwords do not match.");
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      if (selectedRole === "ngo") {
+        // NGO registration
+        await registerNGO({
+          email: formData.email,
+          password: formData.password,
+          displayName: formData.displayName || formData.orgName,
+          orgName: formData.orgName,
+          regNumber: formData.regNumber,
+          phone: formData.phone,
+          city: formData.city,
+          website: formData.website || "",
+          focus: formData.focus || [],
+        });
+      } else {
+        // Volunteer or Community registration
+        const response = await emailRegister({
+          email: formData.email,
+          password: formData.password,
+          displayName: formData.fullName,
+          role: selectedRole, // 'volunteer' or 'community'
+          phone: formData.phone,
+          city: formData.city,
+          neighbourhood: formData.neighbourhood || "",
+          skills: formData.skills || [],
+          availability: formData.availability || "",
+        });
+
+        // Auto-login for non-NGO roles (they are immediately verified)
+        if (response.success && response.token) {
+          localStorage.setItem('authToken', response.token);
+          localStorage.setItem('userId', response.user.uid);
+          localStorage.setItem('userRole', response.user.role);
+          localStorage.setItem('userName', response.user.displayName || '');
+          localStorage.setItem('userEmail', response.user.email || '');
+
+          // Redirect immediately
+          if (response.user.role === 'volunteer') {
+            navigate('/volunteer/dashboard');
+          } else {
+            navigate('/community');
+          }
+          return;
+        }
+      }
+
+      // Success — show the confirmation screen
+      setSubmitted(true);
+    } catch (err) {
+      const errMsg =
+        err.errors?.[0]?.msg ||
+        err.message ||
+        "Registration failed. Please try again.";
+      setSubmitError(errMsg);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const updateField = (id, val) =>
@@ -74,14 +151,14 @@ export default function AuthContainer() {
         <Header />
         <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", width: "100%" }}>
           <div style={{ ...styles.card, textAlign: "center", padding: "36px 28px" }}>
-          <div style={{ fontSize: 48, marginBottom: 20 }}>{role.emoji}</div>
+          <div style={{ fontSize: 48, marginBottom: 20 }}><i className={role.icon} style={{ color: role.color }}></i></div>
           <div style={{ fontFamily: "'DM Serif Display', serif", fontSize: 26, color: "#5a5555", marginBottom: 12 }}>
             {role.key === "ngo" ? "Application submitted!" : "Welcome to CivicBridge!"}
           </div>
           <div style={{ color: "#8b8280", fontSize: 15, maxWidth: 360, margin: "0 auto 32px", lineHeight: 1.7 }}>
             {role.key === "ngo"
               ? "Your NGO account is under review. We verify all organisations within 24–48 hours. You'll receive an email once approved."
-              : `Your ${role.label} account has been created. You can now sign in with Google.`}
+              : `Your ${role.label} account has been created. You can now sign in.`}
           </div>
           <button
             onClick={() => switchMode("login")}
@@ -115,7 +192,6 @@ export default function AuthContainer() {
 
         {mode === "login" && (
           <Login
-            onSignIn={handleSignIn}
             onGoogleAuth={handleGoogleAuth}
             onSwitchToRegister={() => switchMode("register")}
             onLoginSuccess={handleLoginSuccess}
@@ -135,6 +211,8 @@ export default function AuthContainer() {
             role={role}
             formData={formData}
             agreed={agreed}
+            isSubmitting={isSubmitting}
+            submitError={submitError}
             onUpdateField={updateField}
             onAgreeChange={setAgreed}
             onSubmit={handleSubmit}

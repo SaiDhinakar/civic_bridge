@@ -1,6 +1,6 @@
 import GoogleButton from "../UI/GoogleButton";
-import { styles } from "../../../../styles/authStyles";
-import { ROLES } from "../../../../data/roles";
+import { styles } from "../../../styles/authStyles";
+import { ROLES } from "../../../data/roles";
 
 export default function RoleSelection({ onSelectRole, onGoogleAuth, onSwitchToLogin }) {
   return (
@@ -55,7 +55,7 @@ export default function RoleSelection({ onSelectRole, onGoogleAuth, onSwitchToLo
                 flexShrink: 0,
               }}
             >
-              {r.emoji}
+              <i className={r.icon} style={{ color: r.color }}></i>
             </div>
             <div style={{ flex: 1 }}>
               <div style={{ fontWeight: 600, color: r.color, fontSize: 15, fontFamily: "'DM Sans', sans-serif" }}>

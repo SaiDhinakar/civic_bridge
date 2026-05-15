@@ -10,14 +10,19 @@ const USER_ROLES = {
 };
 
 /**
- * Collection references
+ * Collection references — lazy getters to avoid crashing when db is null
  */
-const usersCollection = db.collection('users');
-const ngosCollection = db.collection('ngos');
-const issuesCollection = db.collection('issues');
-const tasksCollection = db.collection('tasks');
-const volunteerMatchesCollection = db.collection('volunteer_matches');
-const activitiesCollection = db.collection('activities');
+const getCollection = (name) => {
+  if (!db) throw new Error('Firebase is not configured. Please add credentials to backend/.env');
+  return db.collection(name);
+};
+
+const usersCollection = { get: () => getCollection('users'), where: (...a) => getCollection('users').where(...a), doc: (...a) => getCollection('users').doc(...a), add: (...a) => getCollection('users').add(...a) };
+const ngosCollection = { get: () => getCollection('ngos'), where: (...a) => getCollection('ngos').where(...a), doc: (...a) => getCollection('ngos').doc(...a), add: (...a) => getCollection('ngos').add(...a) };
+const issuesCollection = { get: () => getCollection('issues'), where: (...a) => getCollection('issues').where(...a), doc: (...a) => getCollection('issues').doc(...a), add: (...a) => getCollection('issues').add(...a) };
+const tasksCollection = { get: () => getCollection('tasks'), where: (...a) => getCollection('tasks').where(...a), doc: (...a) => getCollection('tasks').doc(...a), add: (...a) => getCollection('tasks').add(...a) };
+const volunteerMatchesCollection = { get: () => getCollection('volunteer_matches'), where: (...a) => getCollection('volunteer_matches').where(...a), doc: (...a) => getCollection('volunteer_matches').doc(...a), add: (...a) => getCollection('volunteer_matches').add(...a) };
+const activitiesCollection = { get: () => getCollection('activities'), where: (...a) => getCollection('activities').where(...a), doc: (...a) => getCollection('activities').doc(...a), add: (...a) => getCollection('activities').add(...a) };
 
 /**
  * User Document Structure

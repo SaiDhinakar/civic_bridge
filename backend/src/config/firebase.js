@@ -15,7 +15,11 @@ const serviceAccount = {
 if (!serviceAccount.projectId || !serviceAccount.privateKey || !serviceAccount.clientEmail) {
   console.warn('⚠️  [FIREBASE] Missing Firebase credentials in .env file');
   console.warn('   Required: FIREBASE_PROJECT_ID, FIREBASE_PRIVATE_KEY, FIREBASE_CLIENT_EMAIL');
+  console.warn('   Backend will start, but all database operations will return 503 until .env is configured.');
 }
+
+let db = null;
+let auth = null;
 
 try {
   // Initialize Firebase Admin
@@ -24,15 +28,13 @@ try {
     databaseURL: process.env.FIREBASE_DATABASE_URL,
   });
   console.log('✅ [FIREBASE] Firebase Admin SDK initialized successfully');
+  db = admin.firestore();
+  auth = admin.auth();
+  console.log('✅ [FIREBASE] Firestore and Auth connected');
 } catch (error) {
   console.error('❌ [FIREBASE] Error initializing Firebase:', error.message);
-  throw error;
+  console.warn('⚠️  [FIREBASE] Server will continue without Firebase. Add Firebase credentials to .env to enable database operations.');
 }
-
-const db = admin.firestore();
-const auth = admin.auth();
-
-console.log('✅ [FIREBASE] Firestore and Auth connected');
 
 module.exports = {
   admin,

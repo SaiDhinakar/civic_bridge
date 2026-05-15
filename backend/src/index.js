@@ -83,6 +83,9 @@ app.get('/api/docs', (req, res) => {
     message: 'Civic Bridge Backend API Routes',
     endpoints: {
       auth: {
+        'POST /api/auth/login': 'Email/password login - Body: { email, password }',
+        'POST /api/auth/register': 'Register volunteer/community - Body: { email, password, displayName, role, phone, city, skills, availability }',
+        'POST /api/auth/register-ngo': 'Register NGO admin - Body: { email, password, displayName, orgName, regNumber, phone, city, website, focus }',
         'POST /api/auth/google': 'Google OAuth login - Headers: Authorization: Bearer <google_token>',
         'GET /api/auth/verify': 'Verify JWT token - Headers: Authorization: Bearer <jwt_token>',
       },
