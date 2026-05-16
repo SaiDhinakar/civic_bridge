@@ -8,12 +8,12 @@ dotenv.config();
 /**
  * Register or get existing user after Google Auth
  */
-const registerOrGetUser = async (decodedToken) => {
+const registerOrGetUser = async (decodedToken, isLogin = false) => {
   try {
     const { uid, email, name, picture } = decodedToken;
 
-    // Check if user already exists
-    const userDoc = await usersCollection.doc(uid).get();
+    // Check if user already exists by Google UID
+    let userDoc = await usersCollection.doc(uid).get();
 
     if (userDoc.exists) {
       // Update last active
@@ -21,6 +21,27 @@ const registerOrGetUser = async (decodedToken) => {
         lastActive: new Date(),
       });
       return userDoc.data();
+    }
+
+    // Check if user exists by email (created via manual registration)
+    const emailQuery = await usersCollection.where('email', '==', email).get();
+    if (!emailQuery.empty) {
+      const existingDoc = emailQuery.docs[0];
+      const existingData = existingDoc.data();
+      
+      // Update the existing user to link Google Auth
+      await usersCollection.doc(existingDoc.id).update({
+        googleUid: uid,
+        profilePicture: existingData.profilePicture || picture,
+        lastActive: new Date(),
+      });
+      
+      return { ...existingData, googleUid: uid, profilePicture: existingData.profilePicture || picture, uid: existingDoc.id };
+    }
+
+    // If it's a login attempt but user doesn't exist, throw an error
+    if (isLogin) {
+      throw new Error('Email not found. Please register first.');
     }
 
     // Create new user as CITIZEN by default

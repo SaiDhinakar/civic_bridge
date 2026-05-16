@@ -21,6 +21,7 @@ export default function AuthContainer() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
+  const [loginEmail, setLoginEmail] = useState("");
 
   const role = selectedRole ? ROLES[selectedRole] : null;
 
@@ -43,8 +44,25 @@ export default function AuthContainer() {
     setStep(2);
   };
 
-  const handleGoogleAuth = () => {
-    alert("Google OAuth flow would initiate here.\nScopes: profile, email\nRedirect: /auth/google/callback");
+  const handleGoogleAuth = async (credentialResponse) => {
+    try {
+      if (!credentialResponse.credential) {
+        throw new Error('No credential received from Google');
+      }
+      setSubmitting(true);
+      const isLoginMode = mode === "login";
+      const data = await authAPI.googleLogin(credentialResponse.credential, isLoginMode);
+      if (data.token) {
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        handleLoginSuccess(data.user);
+      }
+    } catch (err) {
+      console.error("Google login failed", err);
+      setSubmitError(err.message || "Google login failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleLoginSuccess = (user) => {
@@ -136,6 +154,14 @@ export default function AuthContainer() {
         err.errors?.[0]?.msg ||
         err.message ||
         "Registration failed. Please try again.";
+        
+      if (errMsg.toLowerCase().includes("already exists")) {
+        setLoginEmail(formData.email);
+        switchMode("login");
+        alert("An account with this email already exists (e.g., from Google Auth). Please log in instead.");
+        return;
+      }
+      
       setSubmitError(errMsg);
     } finally {
       setIsSubmitting(false);
@@ -195,6 +221,7 @@ export default function AuthContainer() {
             onGoogleAuth={handleGoogleAuth}
             onSwitchToRegister={() => switchMode("register")}
             onLoginSuccess={handleLoginSuccess}
+            initialEmail={loginEmail}
           />
         )}
 

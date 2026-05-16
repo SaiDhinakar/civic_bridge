@@ -15,9 +15,10 @@ exports.googleAuth = async (req, res) => {
     }
 
     const decodedToken = req.user; // Set by verifyGoogleToken middleware
+    const isLogin = req.query.isLogin === 'true';
 
     // Register or get existing user
-    const user = await registerOrGetUser(decodedToken);
+    const user = await registerOrGetUser(decodedToken, isLogin);
 
     // Generate JWT token
     const jwtToken = generateJWT(user);
@@ -62,7 +63,7 @@ exports.emailLogin = async (req, res) => {
     if (userSnapshot.empty) {
       return res.status(401).json({
         success: false,
-        message: 'Invalid email or password',
+        message: 'Email not found. Please register first.',
       });
     }
 

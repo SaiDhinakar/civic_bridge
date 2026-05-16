@@ -14,9 +14,12 @@ import './styles/ngo/ngo-forms.css'
 import './styles/ngo/ngo-sidebar.css'
 import 'remixicon/fonts/remixicon.css'
 import App from './App.jsx'
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
+      <App />
+    </GoogleOAuthProvider>
   </StrictMode>,
 )

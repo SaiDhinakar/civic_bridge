@@ -1,5 +1,4 @@
 import FormField from "../Form/FormField";
-import GoogleButton from "../UI/GoogleButton";
 import { styles } from "../../../styles/authStyles";
 
 export default function RoleForm({ role, formData, agreed, isSubmitting, submitError, onUpdateField, onAgreeChange, onSubmit, onGoogleAuth, onBack }) {
@@ -105,13 +104,6 @@ export default function RoleForm({ role, formData, agreed, isSubmitting, submitE
           : `Create ${role.label} Account`}
       </button>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 16 }}>
-        <div style={{ flex: 1, height: 1, background: "#e6e4e1" }} />
-        <span style={{ fontSize: 12, color: "#b8b2af" }}>or</span>
-        <div style={{ flex: 1, height: 1, background: "#e6e4e1" }} />
-      </div>
-
-      <GoogleButton label="Register with Google instead" onClick={onGoogleAuth} style={{ marginTop: 12 }} />
     </div>
   );
 }

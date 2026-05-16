@@ -3,8 +3,8 @@ import GoogleButton from "./UI/GoogleButton";
 import { styles } from "../../styles/authStyles";
 import { emailLogin } from "../../services/authAPI";
 
-export default function Login({ onGoogleAuth, onSwitchToRegister, onLoginSuccess, onError }) {
-  const [email, setEmail] = useState("");
+export default function Login({ onGoogleAuth, onSwitchToRegister, onLoginSuccess, onError, initialEmail = "" }) {
+  const [email, setEmail] = useState(initialEmail);
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");

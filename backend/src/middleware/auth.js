@@ -4,6 +4,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
+const { OAuth2Client } = require('google-auth-library');
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
 /**
  * Middleware to verify Firebase Google Auth token
  */
@@ -18,8 +21,19 @@ const verifyGoogleToken = async (req, res, next) => {
       });
     }
 
-    const decodedToken = await auth.verifyIdToken(token);
-    req.user = decodedToken;
+    const ticket = await googleClient.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    
+    // Map the google payload to the format expected by our app (similar to decoded firebase token)
+    req.user = {
+      uid: payload.sub,
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture
+    };
     next();
   } catch (error) {
     res.status(401).json({

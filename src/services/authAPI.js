@@ -51,9 +51,26 @@ export const verifyToken = async () => {
   }
 };
 
+/**
+ * Google Auth
+ */
+export const googleLogin = async (idToken, isLogin = false) => {
+  try {
+    const response = await apiClient.post(`/auth/google?isLogin=${isLogin}`, {}, {
+      headers: {
+        Authorization: `Bearer ${idToken}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || { message: 'Google Auth failed' };
+  }
+};
+
 export default {
   emailLogin,
   emailRegister,
   registerNGO,
   verifyToken,
+  googleLogin,
 };
